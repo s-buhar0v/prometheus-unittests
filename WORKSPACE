@@ -18,3 +18,7 @@ jsonnet_go_repositories()
 load("@jsonnet_go//bazel:deps.bzl", "jsonnet_go_dependencies")
 
 jsonnet_go_dependencies()
+
+load("//tools:deps.bzl", "prometheus_repositories")
+
+prometheus_repositories()
