@@ -1,3 +1,3 @@
 #!/bin/bash
 
-promtool test rules /tests/nginx-high-rate-of-5xx.yml
+promtool test rules nginx-high-rate-of-5xx.yml
