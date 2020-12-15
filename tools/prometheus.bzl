@@ -4,6 +4,7 @@
 
 # probably should have provider like this one
 # FooFiles = provider(fields = ["transitive_sources"])
+# and also for all objects too
 
 def _prometheus_alert_rules_test_impl(ctx):
     """prometheus_alert_rules_test implementation: we spawn executor task from template and provide required tools"""
@@ -24,7 +25,7 @@ def _prometheus_alert_rules_test_impl(ctx):
         output = test,
         is_executable = True,
         substitutions = {
-            "%srcs%": " ".join([_file.path for _file in ctx.files.srcs]),
+            "%srcs%": " ".join([_file.short_path for _file in ctx.files.srcs]),
             "%tool_path%": "%s" % ctx.executable._tool.path,
             "%command%": cmd,
         },

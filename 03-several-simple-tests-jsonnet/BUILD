@@ -22,16 +22,10 @@ jsonnet_to_json(
     deps = [":unittest"],
 )
 
-# output files are unsupported
-# so it fails
-# promtool also does not support yaml
-# so we need to process json into yaml
-# duh
 prometheus_alert_rules_test(
     name = "test_rules",
     srcs = [
         ":tests",
     ],
     rules = ["rules.yml"],
-    tags = ["manual"],
 )
