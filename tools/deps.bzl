@@ -10,6 +10,6 @@ def prometheus_repositories():
         name = "prometheus_darwin",
         sha256 = "d589a45495cea1aa74bff82335d2145f2d93b8b357c3398739b9139c74dc0cfe",
         urls = [PROMETHEUS_DARWIN_URL],
-        strip_prefix = "prometheus-2.23.0.darwin-amd64",
+        strip_prefix = "prometheus-%s.%s" % (PROMETHEUS_VERSION, PROMETHEUS_DARWIN_ARCH),
         build_file = "@//tools:prometheus.BUILD",
     )
