@@ -2,6 +2,9 @@
 
 # bash_lib_runfiles = BashLibraryRunFileProvider()
 
+# probably should have provider like this one
+# FooFiles = provider(fields = ["transitive_sources"])
+
 def _prometheus_alert_rules_test_impl(ctx):
     """prometheus_alert_rules_test implementation: we spawn executor task from template and provide required tools"""
 
@@ -42,7 +45,7 @@ prometheus_alert_rules_test = rule(
             executable = True,
             cfg = "exec",
         ),
-        "srcs": attr.label_list(mandatory = True, allow_files = True),
+        "srcs": attr.label_list(mandatory = True, allow_files = True, cfg = "target"),
         "rules": attr.label_list(mandatory = True, allow_files = True),
     },
 )
