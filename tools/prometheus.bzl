@@ -14,7 +14,6 @@ def _prometheus_alert_rules_test_impl(ctx):
         transitive_files = depset(ctx.files._tool),
     )
 
-    print(ctx.files.srcs[0].path)
     test = ctx.actions.declare_file(ctx.label.name + ".sh")
 
     ctx.actions.expand_template(
