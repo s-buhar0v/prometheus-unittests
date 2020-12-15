@@ -1,7 +1,3 @@
-"""Test rule that fails if a source file has too long lines."""
-
-# bash_lib_runfiles = BashLibraryRunFileProvider()
-
 # probably should have provider like this one
 # FooFiles = provider(fields = ["transitive_sources"])
 # and also for all objects too
