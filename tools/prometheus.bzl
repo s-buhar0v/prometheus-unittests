@@ -49,3 +49,8 @@ prometheus_alert_rules_test = rule(
 
 def _prometheus_config_test_impl(ctx):
     pass
+
+prometheus_config_test = rule(
+    implementation = _prometheus_config_test_impl,
+    test = True,
+)
