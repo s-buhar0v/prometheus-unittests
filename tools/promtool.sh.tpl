@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-set -eou
+set -e
 
 %tool_path% %command% %srcs%

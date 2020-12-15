@@ -1,4 +1,5 @@
 load("@io_bazel_rules_jsonnet//jsonnet:jsonnet.bzl", "jsonnet_library", "jsonnet_to_json", "jsonnet_to_json_test")
+load("//tools:prometheus.bzl", "prometheus_alert_rules_test")
 
 jsonnet_library(
     name = "unittest",
@@ -6,17 +7,17 @@ jsonnet_library(
 )
 
 jsonnet_to_json_test(
-    name = "test",
-    src = "nginx-high-rate-of-5xx.jsonnet",
-    golden = "nginx-high-rate-of-5xx.golden.json",
+    name = "golden",
+    src = "tests.jsonnet",
+    golden = "tests.golden.json",
     imports = [":unittest"],
     deps = [":unittest"],
 )
 
 jsonnet_to_json(
-    name = "main",
-    src = "nginx-high-rate-of-5xx.jsonnet",
-    outs = ["main.json"],
+    name = "tests",
+    src = "tests.jsonnet",
+    outs = ["tests.json"],
     imports = [":unittest"],
     deps = [":unittest"],
 )

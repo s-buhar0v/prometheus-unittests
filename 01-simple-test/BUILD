@@ -5,5 +5,5 @@ prometheus_alert_rules_test(
     srcs = [
         "tests.yml",
     ],
-    rules = ["alerts.yml"],
+    rules = ["rules.yml"],
 )

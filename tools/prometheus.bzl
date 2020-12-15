@@ -7,11 +7,14 @@ def _prometheus_alert_rules_test_impl(ctx):
 
     # To ensure the files needed by the script are available, we put them in
     # the runfiles.
+    cmd = "test rules"
+
     runfiles = ctx.runfiles(
         files = ctx.files.srcs + ctx.files.rules,
         transitive_files = depset(ctx.files._tool),
     )
 
+    print(ctx.files.srcs[0].path)
     test = ctx.actions.declare_file(ctx.label.name + ".sh")
 
     ctx.actions.expand_template(
@@ -21,7 +24,7 @@ def _prometheus_alert_rules_test_impl(ctx):
         substitutions = {
             "%srcs%": " ".join([_file.path for _file in ctx.files.srcs]),
             "%tool_path%": "%s" % ctx.executable._tool.path,
-            "%command%": "test rules",
+            "%command%": cmd,
         },
     )
     return [DefaultInfo(runfiles = runfiles, executable = test)]
@@ -44,3 +47,6 @@ prometheus_alert_rules_test = rule(
         "rules": attr.label_list(mandatory = True, allow_files = True),
     },
 )
+
+def _prometheus_config_test_impl(ctx):
+    pass
