@@ -1,6 +1,6 @@
-load("//tools:prometheus.bzl", "prometheus_alert_rules_test")
+load("//tools:prometheus.bzl", "prometheus_test")
 
-prometheus_alert_rules_test(
+prometheus_test(
     name = "test_rules",
     srcs = [
         "tests.yml",

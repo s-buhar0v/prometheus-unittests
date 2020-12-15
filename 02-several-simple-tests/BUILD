@@ -1,8 +1,8 @@
-load("//tools:prometheus.bzl", "prometheus_alert_rules_test")
+load("//tools:prometheus.bzl", "prometheus_test")
 
 # file source code is incorrect so it fails
 # to be fixed
-prometheus_alert_rules_test(
+prometheus_test(
     name = "test_rules",
     srcs = [
         "tests.yml",
@@ -11,7 +11,7 @@ prometheus_alert_rules_test(
     tags = ["manual"],
 )
 
-prometheus_alert_rules_test(
+prometheus_test(
     name = "test_rules1",
     srcs = [
         "tests1.yml",
