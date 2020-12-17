@@ -1,4 +1,4 @@
-load("@io_bazel_rules_jsonnet//jsonnet:jsonnet.bzl", "jsonnet_library", "jsonnet_to_json", "jsonnet_to_json_test")
+load("@io_bazel_rules_jsonnet//jsonnet:jsonnet.bzl", "jsonnet_to_json")
 load("//tools:prometheus.bzl", "prometheus_test")
 
 jsonnet_to_json(
