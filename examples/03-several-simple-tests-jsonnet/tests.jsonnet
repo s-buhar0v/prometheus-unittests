@@ -1,9 +1,9 @@
 local unitTest = import 'unittest.libsonnet';
 
-function(rulesFileName)
+function(vars)
   {
     rule_files: [
-      rulesFileName,
+      vars.rulesFileName,
     ],
     evaluation_interval: '1m',
     tests: [

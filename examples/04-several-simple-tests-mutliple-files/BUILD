@@ -28,3 +28,8 @@ prometheus_test(
     srcs = [":tests"],
     rules = ["rules.yml"],
 )
+
+test_suite(
+    name = "all_tests",
+    tests = [":test_rules"],
+)

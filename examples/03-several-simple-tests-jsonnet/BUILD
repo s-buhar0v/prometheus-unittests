@@ -9,8 +9,13 @@ jsonnet_library(
 jsonnet_to_json(
     name = "tests",
     src = "tests.jsonnet",
-    outs = ["tests.json"],
+    outs = [
+        "tests.json",
+    ],
     imports = [":unittest"],
+    tla_code_files = {
+        ":testVariables.json": "vars",
+    },
     deps = [":unittest"],
 )
 
@@ -19,5 +24,12 @@ prometheus_test(
     srcs = [
         ":tests",
     ],
-    rules = ["rules.yml"],
+    rules = [":rules.yml"],
+)
+
+test_suite(
+    name = "all_tests",
+    tests = [
+        ":test_rules",
+    ],
 )
