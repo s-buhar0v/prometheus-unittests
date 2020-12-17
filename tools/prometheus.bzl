@@ -10,8 +10,7 @@ def _prometheus_test_impl(ctx):
     cmd = "test rules"
 
     runfiles = ctx.runfiles(
-        files = ctx.files.srcs + ctx.files.rules,
-        transitive_files = depset(ctx.files._tool),
+        files = ctx.files.srcs + ctx.files.rules + ctx.files._tool,
     )
 
     test = ctx.actions.declare_file(ctx.label.name + ".sh")

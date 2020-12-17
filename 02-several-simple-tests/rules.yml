@@ -1,16 +1,22 @@
+# This is the rules file.
+
 groups:
-- name: nginx
-  rules:
-  - alert: HighRateOf5xx
-    expr: |
-      (
-        (slo_errors_per_request_by_service:ratio_rate:5m{host="example.com"} > 0.01 * 10)
-        and
-        (slo_errors_per_request_by_service:ratio_rate:1h{host="example.com"} > 0.01 * 5)
-      )
-      and on() datetime:is_day
-    for: 0m
-    labels:
-      severity: page
-    annotations:
-      description: '{{printf "%.2f" $value}} 5xx rate on {{ $labels.host }}'
+  - name: example
+    rules:
+      - alert: InstanceDown
+        expr: up == 0
+        for: 5m
+        labels:
+          severity: page
+        annotations:
+          summary: "Instance {{ $labels.instance }} down"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
+
+      - alert: AnotherInstanceDown
+        expr: up == 0
+        for: 10m
+        labels:
+          severity: page
+        annotations:
+          summary: "Instance {{ $labels.instance }} down"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."

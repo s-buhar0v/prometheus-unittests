@@ -1,56 +1,48 @@
+# This is the main input for unit testing.
+# Only this file is passed as command line argument.
+
 rule_files:
   - rules.yml
 
 evaluation_interval: 1m
+
 tests:
+  # Test 1.
   - interval: 1m
+    # Series data.
     input_series:
-      - series: 'slo_errors_per_request_by_service:ratio_rate:5m{host="example.com"}'
-        values: "0.13x10"
-      - series: 'slo_errors_per_request_by_service:ratio_rate:1h{host="example.com"}'
-        values: "0.0000000051x60"
-      - series: "datetime:is_day"
-        values: "1x10"
+      - series: 'up{job="prometheus", instance="localhost:9090"}'
+        values: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+      - series: 'up{job="node_exporter", instance="localhost:9100"}'
+        values: "1+0x6 0 0 0 0 0 0 0 0" # 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0
+      - series: 'go_goroutines{job="prometheus", instance="localhost:9090"}'
+        values: "10+10x2 30+20x5" # 10 20 30 30 50 70 90 110 130
+      - series: 'go_goroutines{job="node_exporter", instance="localhost:9100"}'
+        values: "10+10x7 10+30x4" # 10 20 30 40 50 60 70 80 10 40 70 100 130
+
+    # Unit test for alerting rules.
     alert_rule_test:
-      - alertname: HighRateOf5xx
-        eval_time: 1m
+      # Unit test 1.
+      - eval_time: 10m
+        alertname: InstanceDown
         exp_alerts:
+          # Alert 1.
           - exp_labels:
               severity: page
-              host: example.com
+              instance: localhost:9090
+              job: prometheus
             exp_annotations:
-              description: "0.13 5xx rate on example.com"
-  - interval: 1m
-    input_series:
-      - series: 'slo_errors_per_request_by_service:ratio_rate:5m{host="example.com"}'
-        values: "0.13x10"
-      - series: 'slo_errors_per_request_by_service:ratio_rate:1h{host="example.com"}'
-        values: "0.51x60"
-    alert_rule_test:
-      - alertname: HighRateOf5xx
-        eval_time: 1m
-        exp_alerts: []
-  - interval: 1m
-    input_series:
-      - series: 'slo_errors_per_request_by_service:ratio_rate:5m{host="example.com"}'
-        values: "0.01x10"
-      - series: 'slo_errors_per_request_by_service:ratio_rate:1h{host="example.com"}'
-        values: "0.51x60"
-      - series: "datetime:is_day"
-        values: "1x10"
-    alert_rule_test:
-      - alertname: HighRateOf5xx
-        eval_time: 1m
-        exp_alerts: []
-  - interval: 1m
-    input_series:
-      - series: 'slo_errors_per_request_by_service:ratio_rate:5m{host="example.com"}'
-        values: "0.03x10"
-      - series: 'slo_errors_per_request_by_service:ratio_rate:1h{host="example.com"}'
-        values: "0.20x60"
-      - series: "datetime:is_day"
-        values: "1x10"
-    alert_rule_test:
-      - alertname: HighRateOf5xx
-        eval_time: 1m
-        exp_alerts: []
+              summary: "Instance localhost:9090 down"
+              description: "localhost:9090 of job prometheus has been down for more than 5 minutes."
+    # Unit tests for promql expressions.
+    promql_expr_test:
+      # Unit test 1.
+      - expr: go_goroutines > 5
+        eval_time: 4m
+        exp_samples:
+          # Sample 1.
+          - labels: 'go_goroutines{job="prometheus",instance="localhost:9090"}'
+            value: 50
+          # Sample 2.
+          - labels: 'go_goroutines{job="node_exporter",instance="localhost:9100"}'
+            value: 50

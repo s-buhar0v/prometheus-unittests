@@ -1,12 +1,10 @@
 local unitTest = import 'unittest.libsonnet';
 
-function(rulesFileName)
-  {
-    rule_files: [
-      rulesFileName,
-    ],
-    evaluation_interval: '1m',
-    tests: [
+function(vars)
+  unitTest.testSuite(
+    rulesFileName=vars.rulesFileName,
+
+    testCases=[
       unitTest.testCase(
         name='HighRateOf5xx should alert on 5m and 1h high error rate',
         inputSeriesInterval='1m',
@@ -17,7 +15,7 @@ function(rulesFileName)
           ),
           unitTest.timeSeries(
             series='slo_errors_per_request_by_service:ratio_rate:1h{host="example.com"}',
-            values='0.51x60'
+            values='0.0000051x60'
           ),
           unitTest.timeSeries(
             series='datetime:is_day',
@@ -71,7 +69,7 @@ function(rulesFileName)
         inputSeries=[
           unitTest.timeSeries(
             series='slo_errors_per_request_by_service:ratio_rate:5m{host="example.com"}',
-            values='0.03x10'
+            values='0.123x10'
           ),
           unitTest.timeSeries(
             series='slo_errors_per_request_by_service:ratio_rate:1h{host="example.com"}',
@@ -108,5 +106,5 @@ function(rulesFileName)
           ),
         ]
       ),
-    ],
-  }
+    ]
+  )

@@ -1,7 +1,5 @@
 load("//tools:prometheus.bzl", "prometheus_test")
 
-# file source code is incorrect so it fails
-# to be fixed
 prometheus_test(
     name = "test_rules",
     srcs = [
@@ -22,7 +20,7 @@ prometheus_test(
 test_suite(
     name = "all_tests",
     tests = [
-        # ":test_rules", this guy does not work
+        ":test_rules",
         ":test_rules1",
     ],
 )

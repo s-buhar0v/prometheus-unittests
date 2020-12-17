@@ -9,15 +9,22 @@ jsonnet_library(
 jsonnet_to_json(
     name = "tests",
     src = "tests.jsonnet",
-    outs = ["tests.json"],
+    outs = [
+        "HighRateOf5xx_should_alert_on_5m_and_1h_high_error_rate.json",
+        "HighRateOf5xx_should_not_alert_in_the_night.json",
+        "HighRateOf5xx_should_not_alert_on_low_error_rate.json",
+        "HighRateOf5xx_should_not_alert_on_low_error_rate_during_1_hour.json",
+    ],
     imports = [":unittest"],
+    multiple_outputs = 1,
+    tla_code_files = {
+        ":testVariables.json": "vars",
+    },
     deps = [":unittest"],
 )
 
 prometheus_test(
     name = "test_rules",
-    srcs = [
-        ":tests",
-    ],
+    srcs = [":tests"],
     rules = ["rules.yml"],
 )
