@@ -1,11 +1,6 @@
 load("@io_bazel_rules_jsonnet//jsonnet:jsonnet.bzl", "jsonnet_library", "jsonnet_to_json", "jsonnet_to_json_test")
 load("//tools:prometheus.bzl", "prometheus_test")
 
-jsonnet_library(
-    name = "unittest",
-    srcs = ["unittest.libsonnet"],
-)
-
 jsonnet_to_json(
     name = "tests",
     src = "tests.jsonnet",
@@ -15,12 +10,12 @@ jsonnet_to_json(
         "HighRateOf5xx_should_not_alert_on_low_error_rate.json",
         "HighRateOf5xx_should_not_alert_on_low_error_rate_during_1_hour.json",
     ],
-    imports = [":unittest"],
+    imports = ["//unittestlib"],
     multiple_outputs = 1,
     tla_code_files = {
         ":testVariables.json": "vars",
     },
-    deps = [":unittest"],
+    deps = ["//unittestlib:lib"],
 )
 
 prometheus_test(

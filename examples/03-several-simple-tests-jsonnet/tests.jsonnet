@@ -1,4 +1,4 @@
-local unitTest = import 'unittest.libsonnet';
+local unitTest = import 'unittestlib/unittest.libsonnet';
 
 function(vars)
   {
