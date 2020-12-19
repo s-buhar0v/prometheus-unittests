@@ -1,5 +1,5 @@
 load("@io_bazel_rules_jsonnet//jsonnet:jsonnet.bzl", "jsonnet_to_json")
-load("//tools:prometheus.bzl", "prometheus_test")
+load("@io_bazel_rules_prometheus//prometheus:prometheus.bzl", "promtool_unit_test")
 
 jsonnet_to_json(
     name = "tests",
@@ -18,7 +18,7 @@ jsonnet_to_json(
     deps = ["//unittestlib:lib"],
 )
 
-prometheus_test(
+promtool_unit_test(
     name = "test_rules",
     srcs = [":tests"],
     rules = ["rules.yml"],

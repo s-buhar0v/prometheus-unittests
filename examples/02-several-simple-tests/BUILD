@@ -1,6 +1,6 @@
-load("//tools:prometheus.bzl", "prometheus_test")
+load("@io_bazel_rules_prometheus//prometheus:prometheus.bzl", "promtool_unit_test")
 
-prometheus_test(
+promtool_unit_test(
     name = "test_rules",
     srcs = [
         "tests.yml",
@@ -9,7 +9,7 @@ prometheus_test(
     tags = ["manual"],
 )
 
-prometheus_test(
+promtool_unit_test(
     name = "test_rules1",
     srcs = [
         "tests1.yml",
