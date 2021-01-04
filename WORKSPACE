@@ -21,15 +21,11 @@ jsonnet_go_dependencies()
 
 http_archive(
     name = "io_bazel_rules_prometheus",
-    sha256 = "6e7817ed382373d1056ea9fe8a3e3c06bcffd11cee14c22a6930ca38b65aaf07",
-    strip_prefix = "rules_prometheus-7cd073209bb04b06eacd8145c4576044c5ee6cc0",
-    urls = ["https://github.com/5h4d0w4rt/rules_prometheus/archive/0.0.2-alpha.zip"],
+    sha256 = "e026853928dbf06f67430448d4242921b387b2e1c6b317f05b3db0c21c08f2aa",
+    strip_prefix = "rules_prometheus-0.0.3",
+    urls = ["https://github.com/5h4d0w4rt/rules_prometheus/archive/0.0.3.zip"],
 )
 
 load("@io_bazel_rules_prometheus//:deps.bzl", "prometheus_repositories")
 
 prometheus_repositories()
-
-load("@io_bazel_rules_prometheus//prometheus:prometheus.bzl", "prometheus_register_toolchains")
-
-prometheus_register_toolchains()
