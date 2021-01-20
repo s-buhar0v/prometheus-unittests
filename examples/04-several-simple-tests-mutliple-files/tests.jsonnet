@@ -11,11 +11,11 @@ function(vars)
         inputSeries=[
           unitTest.timeSeries(
             series='slo_errors_per_request_by_service:ratio_rate:5m{host="example.com"}',
-            values='0.13x10'
+            values='0.50x10'
           ),
           unitTest.timeSeries(
             series='slo_errors_per_request_by_service:ratio_rate:1h{host="example.com"}',
-            values='0.0000051x60'
+            values='0.50x60'
           ),
           unitTest.timeSeries(
             series='datetime:is_day',
@@ -33,7 +33,7 @@ function(vars)
                   host: 'example.com',
                 },
                 annotations: {
-                  description: '0.13 5xx rate on example.com',
+                  description: '0.50 5xx rate on example.com',
                 },
               },
             ]
