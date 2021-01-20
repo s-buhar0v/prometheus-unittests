@@ -2,22 +2,39 @@
 
 ## Overview
 
-Prometheus rules unit tests wrapper (via `bash` and `jsonnet`) evolution. Every folder has a sample and `run.sh` scrpit
+Prometheus unit testing rules (via `bazel` and `jsonnet`) evolution. Every folder has a sample and BUILD file to run
 
 Folders:
 
-- `00-jsonnet` - simple jsonnet example
-- `01-simple-test` - default unit test
-- `02-several-simple-tests` - several default unit tests
-- `03-several-simple-tests-json` - several default unit tests in JSON
-- `04-several-simple-tests-jsonnnet` - unit tests wrapped via `jsonnet`
-- `05-several-simple-tests-logs` - unit tests wrapped via `jsonnet` with logs
-- `06-several-simple-tests-stats-and-exit-code` - unit tests wrapped via `jsonnet` with logs, stats and correct exit code
+- `examples/00-jsonnet` - simple jsonnet hello world example
+- `examples/01-simple-test` - default unit test
+- `examples/02-several-simple-tests` - several default unit tests
+- `examples/03-several-simple-tests-jsonnet` - several unit test cases in Jsonnet
+- `examples/04-several-simple-tests-mutliple-files` - test suite of multiple unit test cases in Jsonnet
 
 ## Requirements for local running
 
-- [jsonnet](https://jsonnet.org)
-- [promtool](https://prometheus.io/download/) - can be founded in prometheus archive
+- [bazel](https://bazel.build/)
+
+## How-to
+
+To run specific test in the directory
+
+```bash
+bazel test //examples/01-simple-test:<test_name>
+```
+
+To run all tests in the directory
+
+```bash
+bazel test //examples/01-simple-test:all
+```
+
+To run all tests
+
+```bash
+bazel test //examples/...
+```
 
 ## Useful links
 
