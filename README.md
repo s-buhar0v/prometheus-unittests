@@ -1,5 +1,7 @@
 # Prometheus rules unit testing
 
+![CI](https://github.com/s-buhar0v/prometheus-unittests/workflows/CI/badge.svg)
+
 ## Overview
 
 Prometheus unit testing rules (via `bazel` and `jsonnet`) evolution. Every folder has a sample and BUILD file to run
