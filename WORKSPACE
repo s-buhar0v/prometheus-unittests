@@ -21,9 +21,9 @@ jsonnet_go_dependencies()
 
 http_archive(
     name = "io_bazel_rules_prometheus",
-    sha256 = "e026853928dbf06f67430448d4242921b387b2e1c6b317f05b3db0c21c08f2aa",
-    strip_prefix = "rules_prometheus-0.0.3",
-    urls = ["https://github.com/5h4d0w4rt/rules_prometheus/archive/0.0.3.zip"],
+    sha256 = "c9980c638cba01015f31bc610788d5396b05b67c99c1f065fef17427cb8459fe",
+    strip_prefix = "rules_prometheus-0.0.4",
+    urls = ["https://github.com/5h4d0w4rt/rules_prometheus/archive/0.0.4.zip"],
 )
 
 load("@io_bazel_rules_prometheus//:deps.bzl", "prometheus_repositories")
